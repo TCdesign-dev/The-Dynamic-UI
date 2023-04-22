@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Dynamic UI/Beta</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+  <style>
+ body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f5f5f5;
+}
+
+button {
+  font-size: 18px;
+  padding: 10px 20px;
+  background-color: #1abc9c;
+  color: white;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.dropdown {
+  position: absolute;
+  top: 80px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  display: none;
+  width: 200px;
+}
+
+.dropdown-item {
+  padding: 10px;
+  font-size: 16px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background-color: #eee;
+}
+
+.info-section {
+  margin-top: 30px;
+}
+
+.info-section h3 {
+  margin-bottom: 5px;
+}   
+    </style>
+</head>
+<body>
+  <button id="toggleButton">Click me</button>
+  <div class="dropdown" id="dropdown">
+    <div class="dropdown-item">Component 1</div>
+    <div class="dropdown-item">Component 2</div>
+    <div class="dropdown-item">Component 3</div>
+  </div>
+
+  <div class="info-section">
+    <h3>Pressure time: <span id="pressTime">0</span>ms</h3>
+    <h3>Animation length: <span id="animationDuration">0</span>ms</h3>
+  </div>
+    <script>
+  const toggleButton = document.getElementById('toggleButton');
+const dropdown = document.getElementById('dropdown');
+const pressTime = document.getElementById('pressTime');
+const animationDuration = document.getElementById('animationDuration');
+let mouseDownTime = null;
+
+toggleButton.addEventListener('mousedown', (event) => {
+  mouseDownTime = event.timeStamp;
+});
+
+toggleButton.addEventListener('mouseup', (event) => {
+  const mouseUpTime = event.timeStamp;
+  const timeDifference = mouseUpTime - mouseDownTime;
+
+  pressTime.textContent = timeDifference.toFixed(2);
+
+  if (dropdown.style.display === 'none') {
+    const duration = timeDifference * 2;
+    animationDuration.textContent = duration.toFixed(2);
+
+    Velocity(dropdown, 'slideDown', {
+      duration: duration,
+      display: 'block',
+    });
+  } else {
+    const duration = timeDifference * 2;
+    animationDuration.textContent = duration.toFixed(2);
+
+    Velocity(dropdown, 'slideUp', {
+      duration: duration,
+      display: 'none',
+    });
+  }
+});
+  </script>
+
+</body>
+</html>
