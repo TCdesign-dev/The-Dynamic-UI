@@ -75,40 +75,58 @@ button {
     <h3>Animation length: <span id="animationDuration">0</span>ms</h3>
   </div>
     <script>
-  const toggleButton = document.getElementById('toggleButton');
+// Recupera gli elementi del DOM
+const toggleButton = document.getElementById('toggleButton');
 const dropdown = document.getElementById('dropdown');
 const pressTime = document.getElementById('pressTime');
 const animationDuration = document.getElementById('animationDuration');
 let mouseDownTime = null;
 
+// Adds an event listener for the 'mousedown' event on the button
 toggleButton.addEventListener('mousedown', (event) => {
+  // Stores the time the button is pressed
   mouseDownTime = event.timeStamp;
 });
 
+// Adds an event listener for the 'mouseup' event on the button
 toggleButton.addEventListener('mouseup', (event) => {
+  // Stores the time when the button is released
   const mouseUpTime = event.timeStamp;
+
+  // Calculates the difference between the release time and the button-press time
   const timeDifference = mouseUpTime - mouseDownTime;
 
+  // Shows the press time of the button in the 'pressTime' element
   pressTime.textContent = timeDifference.toFixed(2);
 
+  // Check if the drop-down menu is hidden
   if (dropdown.style.display === 'none') {
+    // Calculates the duration of the animation based on the time the button is pressed
     const duration = timeDifference * 2;
+
+    // Shows the duration of the animation in the 'animationDuration' element
     animationDuration.textContent = duration.toFixed(2);
 
+    // Runs the 'slideDown' animation on the drop-down menu with the calculated duration
     Velocity(dropdown, 'slideDown', {
       duration: duration,
       display: 'block',
     });
   } else {
+    // Calculates the duration of the animation based on the time the button is pressed
     const duration = timeDifference * 2;
+
+    // Shows the duration of the animation in the 'animationDuration' element
     animationDuration.textContent = duration.toFixed(2);
 
+    // Runs the 'slideUp' animation on the drop-down menu with the calculated duration
     Velocity(dropdown, 'slideUp', {
       duration: duration,
       display: 'none',
     });
   }
 });
+
   </script>
 
 </body>
