@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -79,57 +79,55 @@ button {
     <h3>Animation length: <span id="animationDuration">0</span>ms</h3>
   </div>
     <script>
-// Recupera gli elementi del DOM
+// Retrieve DOM elements
 const toggleButton = document.getElementById('toggleButton');
 const dropdown = document.getElementById('dropdown');
 const pressTime = document.getElementById('pressTime');
 const animationDuration = document.getElementById('animationDuration');
 let mouseDownTime = null;
 
-// Adds an event listener for the 'mousedown' event on the button
+// Adds an event listener for the "mousedown" event on the button
 toggleButton.addEventListener('mousedown', (event) => {
-  // Stores the time the button is pressed
+  // Memorizza il tempo in cui il pulsante viene premuto
   mouseDownTime = event.timeStamp;
 });
 
-// Adds an event listener for the 'mouseup' event on the button
+// Adds an event listener for the mouseup event on the button
 toggleButton.addEventListener('mouseup', (event) => {
   // Stores the time when the button is released
   const mouseUpTime = event.timeStamp;
 
-  // Calculates the difference between the release time and the button-press time
+  // Calculates the difference between the release time and the button press time
   const timeDifference = mouseUpTime - mouseDownTime;
 
-  // Shows the press time of the button in the 'pressTime' element
+  // Displays the button press time in the "pressTime" element
   pressTime.textContent = timeDifference.toFixed(2);
 
-  // Check if the drop-down menu is hidden
+  // Calculates the duration of the animation based on the time the button was pressed
+  let duration = timeDifference * 2;
+
+  // Sets an upper limit to the duration of the animation (1000 ms)
+  duration = Math.min(duration, 1000);
+
+  // Display the duration of the animation in the "animationDuration" element
+  animationDuration.textContent = duration.toFixed(2);
+
+  // Checks whether the dropdown is hidden
   if (dropdown.style.display === 'none') {
-    // Calculates the duration of the animation based on the time the button is pressed
-    const duration = timeDifference * 2;
-
-    // Shows the duration of the animation in the 'animationDuration' element
-    animationDuration.textContent = duration.toFixed(2);
-
-    // Runs the 'slideDown' animation on the drop-down menu with the calculated duration
+    // Runs the animation "slideDown" on the drop-down menu with the calculated duration
     Velocity(dropdown, 'slideDown', {
       duration: duration,
       display: 'block',
     });
   } else {
-    // Calculates the duration of the animation based on the time the button is pressed
-    const duration = timeDifference * 2;
-
-    // Shows the duration of the animation in the 'animationDuration' element
-    animationDuration.textContent = duration.toFixed(2);
-
-    // Runs the 'slideUp' animation on the drop-down menu with the calculated duration
+    // Runs the 'slideUp' animation on the dropdown with the calculated duration
     Velocity(dropdown, 'slideUp', {
       duration: duration,
       display: 'none',
     });
   }
 });
+
 
   </script>
 
