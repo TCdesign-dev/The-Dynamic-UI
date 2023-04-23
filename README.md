@@ -15,7 +15,8 @@ In this context, our `Dynamic UI` system aims to provide an optimised browsing e
 - Press time and animation duration output
 
 ## Preview
-Here is a preview on Codepen [https://codepen.io/TC-Design/pen/RweKjmN]
+Here is a preview on Codepen [https://codepen.io/TC-Design/pen/RweKjmN] o prova il confronto [https://codepen.io/TC-Design/pen/poxRmWM]
+
 
 ## Installation
 
